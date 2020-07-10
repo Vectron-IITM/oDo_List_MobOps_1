@@ -17,9 +17,18 @@ class TodoListState extends State<TodoList> {
   }
 
   Widget buildItems(BuildContext context, int index) {
-    final todo = todos[index];
+    Todo todo = todos[index];
 
     return CheckboxListTile(
+      secondary: IconButton(
+        icon: Icon(Icons.delete),
+        onPressed: () {
+          setState(() {
+            todos.removeAt(index);
+          });
+        },
+      ),
+      controlAffinity: ListTileControlAffinity.leading,
       value: todo.isDone,
       title: Text(todo.title),
       onChanged: (bool isChecked) {
